@@ -15,3 +15,29 @@
 -- каждый из двух алгоритмов нужно оформить в виде отдельной ф-ции
 -- проставьте сложности каждого выражения в двух ваших алгоритмах
 """
+
+
+def sort_func1(lst):  # Сложность: O(n^2)
+    for i in range(len(lst)):  # O(n)
+        num_idx = i
+        for j in range(i + 1, len(lst)):  # O(n)
+            if lst[j] < lst[num_idx]:  # O(1)
+                num_idx = j  # O(1)
+        lst[i], lst[num_idx] = lst[num_idx], lst[i]  # O(1)
+    return lst[0]  # O(1)
+
+
+def sort_func2(lst):  # Сложность: O(n)
+
+    num = lst[0]  # O(1)
+    for i in range(len(lst)):  # O(n)
+        if num > lst[i]:  # O(1)
+            num = lst[i]  # O(1)
+    return num  # O(1)
+
+
+# Проверка:
+lst = [9, 2, 6, 3, 1]
+print(f'Минимальное значение {lst} по алгоритму 1: {sort_func1(lst)}')
+lst = [9, 2, 6, 3, 1]
+print(f'Минимальное значение {lst} по алгоритму 2: {sort_func2(lst)}')

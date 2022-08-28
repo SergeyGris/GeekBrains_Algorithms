@@ -22,3 +22,32 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+users = {
+    'Sergey': {'password': '1a23asf45', 'is_active': True},
+    'Marya': {'password': '54asf5321', 'is_active': True},
+    'Darya': {'password': 'asd1564f', 'is_active': True},
+    'Aleksandr': {'password': '7a7asd68', 'is_active': False},
+    'Michail': {'password': 'afqf546', 'is_active': False},
+    'Dmitry': {'password': 'asf9742', 'is_active': False},
+}
+
+
+def verification(name, password, users=users):
+    users_list = list(users)  # O(n)
+    if name in users_list:  # O(1)
+        if password == users[name]['password'] \
+                and users[name]['is_active'] == True:  # O(1)
+            print(f'Доступ пользователю {name} разрешен')  # O(1)
+        else:
+            print(f'Неверный пароль для пользователя {name}. Доступ запрещен!')  # O(1)
+    else:
+        print(f'Пользователь {name} не обнаружен, пройдите регистрацию')  # O(1)
+
+
+# Проверка
+# Верный пользователь
+verification('Darya','asd1564f')
+# Неверный пользователь
+verification('Alexey','asd1564f')
+# Неверный пароль
+verification('Michail','asd1564f')
