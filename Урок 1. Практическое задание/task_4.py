@@ -32,22 +32,47 @@ users = {
 }
 
 
+#  Алгоритм 1. Сложность O(n^2)
 def verification(name, password, users=users):
     users_list = list(users)  # O(n)
-    if name in users_list:  # O(1)
+    if name in users_list:  # O(n)
         if password == users[name]['password'] \
                 and users[name]['is_active'] == True:  # O(1)
             print(f'Доступ пользователю {name} разрешен')  # O(1)
         else:
-            print(f'Неверный пароль для пользователя {name}. Доступ запрещен!')  # O(1)
+            print(
+                f'Неверный пароль для пользователя {name}. Доступ запрещен!')  # O(1)
+    else:
+        print(
+            f'Пользователь {name} не обнаружен, пройдите регистрацию')  # O(1)
+
+
+# Проверка
+# Верный пользователь
+verification('Darya', 'asd1564f')
+# Неверный пользователь
+verification('Alexey', 'asd1564f')
+# Неверный пароль
+verification('Michail', 'asd1564f')
+
+
+#  Алгоритм 2. Сложность O(1), более эффективен т.к. меньше сложность
+def verification2(name, password, users=users):
+    if users.get(name):  # O(1)
+        if password == users[name]['password'] \
+                and users[name]['is_active'] == True:  # O(1)
+                print(f'Доступ пользователю {name} разрешен')  # O(1)
+        else:
+            print(f'Неверный пароль для пользователя {name} '
+                  f'или доступ запрещен!')  # O(1)
     else:
         print(f'Пользователь {name} не обнаружен, пройдите регистрацию')  # O(1)
 
 
 # Проверка
 # Верный пользователь
-verification('Darya','asd1564f')
+verification2('Darya', 'asd1564f')
 # Неверный пользователь
-verification('Alexey','asd1564f')
+verification2('Alexey', 'asd1564f')
 # Неверный пароль
-verification('Michail','asd1564f')
+verification2('Michail', 'asd1564f')
