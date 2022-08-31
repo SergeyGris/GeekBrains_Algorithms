@@ -17,3 +17,62 @@
 
 Примечание: ПРОШУ ВАС ВНИМАТЕЛЬНО ЧИТАТЬ ЗАДАНИЕ!
 """
+
+
+class TaskList:
+    def __init__(self):
+        self.tasks_list = []
+        self.revision_list = []
+        self.tasks_done_list = []
+
+    def __str__(self):
+        rez = ''
+        if self.tasks_list != []:
+            tasks_rez = 'Задачи: '
+            for i in range(len(self.tasks_list) - 1, -1, -1):
+                task = self.tasks_list[i]
+                tasks_rez += '\n' + task
+            rez += '\n' + tasks_rez
+
+        if self.revision_list != []:
+            revision_rez = 'Задачи на доработке: '
+            for i in range(len(self.revision_list) - 1, -1, -1):
+                task = self.revision_list[i]
+                revision_rez += '\n' + task
+            rez += '\n' + revision_rez
+        if self.tasks_done_list != []:
+            tasks_done_rez = 'Выполненные задачи: '
+            for i in range(len(self.tasks_done_list) - 1, -1, -1):
+                task = self.tasks_done_list[i]
+                tasks_done_rez += '\n' + task
+            rez += '\n' + tasks_done_rez
+        return rez
+
+    def is_empty(self):
+        return self.tasks_list == []
+
+    def input(self, task):
+        self.tasks_list.insert(0, task)
+
+    def task_done(self):
+        task = self.tasks_list.pop()
+        self.tasks_done_list.insert(0, task)
+
+    def revise(self):
+        task = self.tasks_list.pop()
+        return self.revision_list.insert(0, task)
+
+    def size(self):
+        return len(self.tasks_list)
+
+
+if __name__ == '__main__':
+    tasklist = TaskList()
+    tasklist.input('1 Помыть посуду')
+    tasklist.input('2 Подмести пол')
+    tasklist.input('3 Приготовить обед')
+
+    print(tasklist)
+    tasklist.task_done()
+    tasklist.revise()
+    print(tasklist)
