@@ -19,3 +19,16 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
+def symbols(start=32, stop=127, max_length=10, rez=''):
+    if start <= stop:
+        if start%10==0:
+            rez += f'\n{start} - {chr(start)} '
+        else:
+            rez += f'{start} - {chr(start)} '
+        start+=1
+        return symbols(start, stop, max_length, rez)
+    return print(rez)
+
+symbols()
