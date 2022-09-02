@@ -15,3 +15,27 @@
 и одного из алгоритмов, например, sha512
 Можете усложнить задачу, реализовав ее через ООП
 """
+import hashlib
+
+
+class Url_cache():
+    def __init__(self):
+        self.cache = {}
+
+    def cache_url(self, url):
+        if self.cache.get(url, False):
+            return print(self.cache.get(url))
+
+        else:
+            url_hash = hashlib.sha512(url.encode('utf-8'))
+            url_hash_hex = url_hash.hexdigest()
+            self.cache[url] = url_hash_hex
+            return print(f'{url} добавлен')
+
+
+U1 = Url_cache()
+
+print(U1.cache)
+U1.cache_url('https://gb.ru/education')
+U1.cache_url('https://gb.ru/education')
+print(U1.cache)
