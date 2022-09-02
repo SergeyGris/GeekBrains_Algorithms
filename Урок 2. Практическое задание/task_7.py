@@ -13,3 +13,18 @@
 
 Решите через рекурсию. В задании нельзя применять циклы.
 """
+
+
+def fi_func(n, summ=0):
+    if n != 0:
+        summ += n
+        n -= 1
+        return fi_func(n, summ)
+    return summ
+
+
+n = 5
+summ = fi_func(n)
+if summ == n * (n + 1) / 2:
+    print(f'Равенство верное \n'
+          f'{summ}={n}*({n}-1)/2')

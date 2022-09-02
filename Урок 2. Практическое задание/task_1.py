@@ -27,3 +27,81 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+#  С помощью цикла:
+
+# def calculate():
+#     while True:
+#         a = input('Для остановки программы введите "stop" \n\n'
+#                   'Введите число:')
+#         if a == 'stop':
+#             break
+#         operator = input(f'{a} ...')
+#         if operator == 'stop':
+#             break
+#         b = input(f'{a} {operator}')
+#         if b == 'stop':
+#             break
+#
+#         a, b = int(a), int(b)
+#
+#         try:
+#             if operator == '+':
+#                 rez = a + b
+#             elif operator == '-':
+#                 rez = a - b
+#             elif operator == '/':
+#                 rez = a / b
+#             elif operator == '*':
+#                 rez = a * b
+#             print(f'{a} {operator} {b} = {rez}')
+#         except ValueError:
+#             print('Неверные данные')
+#         except ZeroDivisionError:
+#             print('Деление на 0 невозможно\n')
+
+# С помощью рекурсии:
+def calculate():
+    a = input('Для остановки программы введите "stop" \n\n'
+              'Введите число:')
+    if a == 'stop':
+        return 'Программа завершена'
+    operator = input(f'{a} _')
+    while operator not in '+-/*':
+        if operator == 'stop':
+            return 'Программа завершена'
+        print('Оператор может быть только +,-,/,*. Попробуйте снова')
+        operator = input(f'{a} _')
+
+
+    b = input(f'{a} {operator}')
+    if b == 'stop':
+        return 'Программа завершена'
+
+    a, b = int(a), int(b)
+
+    try:
+        if operator == '+':
+            rez = a + b
+            print(f'{a} {operator} {b} = {rez}')
+            return calculate()
+        elif operator == '-':
+            rez = a - b
+            print(f'{a} {operator} {b} = {rez}')
+            return calculate()
+        elif operator == '/':
+            rez = a / b
+            print(f'{a} {operator} {b} = {rez}')
+            return calculate()
+        elif operator == '*':
+            rez = a * b
+            print(f'{a} {operator} {b} = {rez}')
+            return calculate()
+
+    except ValueError:
+        print('Неверные данные')
+    except ZeroDivisionError:
+        print('Деление на 0 невозможно\n')
+
+
+calculate()

@@ -18,3 +18,18 @@
 Не забудьте проверить на числе, которое оканчивается на 0.
 1230 -> 0321
 """
+
+
+def inversion(i, invnumb=''):
+    if i // 10 < 1:
+        invnumb += str(i)
+        return invnumb
+    j = i % 10
+    i = i // 10
+    invnumb += str(j)
+
+    return inversion(i, invnumb)
+
+
+num = int(input('Введите число:'))
+print(f'Инверсия числа {num} : {inversion(num)}')
