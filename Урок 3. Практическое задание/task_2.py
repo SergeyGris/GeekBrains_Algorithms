@@ -24,13 +24,62 @@ f1dcaeeafeb855965535d77c55782349444b
 """
 import hashlib
 
-salt='my_salt'
-hash_obj = hashlib.sha256((input('Введте пароль: ')+salt).encode('utf-8'))
-pass_in_db = hash_obj.hexdigest()
-print(f'В базе данных хранится строка: {pass_in_db}')
-hash_obj = hashlib.sha256((input('Введте пароль еще раз для проверки: ')+salt).encode('utf-8'))
-pass_repeat = hash_obj.hexdigest()
-if pass_repeat==pass_in_db:
-    print('Вы ввели правильный пароль')
-else:
-    print('Вы ввели неверный пароль')
+from os.path import join, dirname
+from sqlite3 import connect, OperationalError, IntegrityError
+
+
+class HashClass:
+    def __init__(self):
+        self.db_obj = join(dirname(__file__), 'demo.sqlite')
+        self.conn = connect(self.db_obj)
+        self.crs = self.conn.cursor()
+
+    def create_table(self):
+        create_stmt = 'CREATE TABLE user_info (user_login VARCHAR(255) ' \
+                      'UNIQUE, USER_PASSWORD VARCHAR(255));'
+        try:
+            self.crs.execute(create_stmt)
+        except OperationalError:
+            print('таблица уже есть')
+        else:
+            self.conn.commit()
+            print('Таблица добавлена в БД')
+
+    @staticmethod
+    def get_hash():
+        login = input('Введите логин:')
+        password = input('Введите пароль:')
+        salt = 'my_salt'
+        hash_obj = hashlib.sha256((password + salt).encode()).hexdigest()
+        return login, hash_obj
+
+    def register(self):
+        login, reg_hash = self.get_hash()
+
+        insert_stmt = 'INSERT INTO user_info(user_login,' \
+                      ' user_password)VALUES(?,?)'
+        user_info = login, reg_hash
+
+        try:
+            self.crs.execute(insert_stmt, user_info)
+        except IntegrityError:
+            print('Данный пользователь уже есть. Выполните вход')
+        else:
+            self.conn.commit()
+            print('Регистрация прошла успешно')
+
+    def log_in(self):
+        login, check_hash = self.get_hash()
+        select_stmt = 'SELECT user_password FROM user_info WHERE user_login= ?'
+        self.crs.execute(select_stmt, (login,))
+        out_hash = self.crs.fetchone()
+        if check_hash == out_hash[0]:
+            print('Логин и пароль совпадают')
+        else:
+            print('Неверный логин и пароль')
+
+
+network = HashClass()
+network.create_table()
+network.register()
+network.log_in()

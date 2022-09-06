@@ -18,7 +18,7 @@
 import hashlib
 
 
-class Url_cache():
+class UrlCache():
     def __init__(self):
         self.cache = {}
 
@@ -33,7 +33,7 @@ class Url_cache():
             return print(f'{url} добавлен')
 
 
-U1 = Url_cache()
+U1 = UrlCache()
 
 print(U1.cache)
 U1.cache_url('https://gb.ru/education')
