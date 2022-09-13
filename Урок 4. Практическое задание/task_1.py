@@ -21,9 +21,8 @@ def func_1(nums):
             new_arr.append(i)
     return new_arr
 
-
 def func_2(lst):
-    return [i for i in lst if i % 2 == 0]
+    return [lst.index(i) for i in lst if i % 2 == 0]
 
 
 lst1 = [i for i in range(1000)]

@@ -52,10 +52,11 @@ def func_3(lst):
            f'оно появилось в массиве {dct[max_num]} раз(а)'
 
 
-def func_4(array):
-    num=max(array, key=array.count)
+def func_4(lst):
+    num = max(lst, key=lst.count)
     return f'Чаще всего встречается число {num}, ' \
            f'оно появилось в массиве {array.count(num)} раз(а)'
+
 
 print(func_3(array))
 
