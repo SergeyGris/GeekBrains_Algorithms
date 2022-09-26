@@ -18,3 +18,26 @@
 Подсказка: обратите внимание, сортируем не по возрастанию, как в примере,
 а по убыванию.
 """
+
+from random import randint
+
+
+
+def bubble_sort(lst_obj):
+    n = 1
+    while n < len(lst_obj):
+        count = 0
+        for i in range(len(lst_obj) - n):
+            if lst_obj[i] < lst_obj[i + 1]:
+                lst_obj[i], lst_obj[i + 1] = lst_obj[i + 1], lst_obj[i]
+                count += 1
+        if count == 0: #Доработка
+            break
+        n += 1
+    return lst_obj
+
+
+orig_list = [randint(-100, 100) for _ in range(10)]
+
+print(orig_list)
+print(bubble_sort(orig_list))

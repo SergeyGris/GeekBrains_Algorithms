@@ -16,3 +16,43 @@
 
 В конце сделайте аналитику какой трех из способов оказался эффективнее
 """
+
+from random import randint
+from timeit import timeit
+from statistics import median
+
+orig_list = [randint(-100, 100) for _ in range(9)]
+print(orig_list)
+print(median(orig_list))
+
+orig_list = [randint(-100, 100) for _ in range(9)]
+# замеры 10
+print(
+    timeit(
+        "median(orig_list[:])",
+        globals=globals(),
+        number=1000))
+
+orig_list = [randint(-100, 100) for _ in range(99)]
+
+# замеры 100
+print(
+    timeit(
+        "median(orig_list[:])",
+        globals=globals(),
+        number=1000))
+
+orig_list = [randint(-100, 100) for _ in range(999)]
+
+# замеры 1000
+print(
+    timeit(
+        "median(orig_list[:])",
+        globals=globals(),
+        number=1000))
+
+"""
+0.001082600000000003
+0.008265599999999998
+0.07376839999999998
+"""
