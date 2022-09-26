@@ -30,3 +30,32 @@
 
 Это файл для второго скрипта
 """
+from memory_profiler import profile
+import hashlib
+
+@profile
+def substring(st):
+    rez = set()
+    for i in st:
+
+        hash_obj = hashlib.sha256(st.encode('utf-8'))
+        hash_hexdig_obj = hash_obj.hexdigest()
+        rez.add(hash_hexdig_obj)
+        a = st.split(i, 1)
+        for j in a:
+            if j != '':
+                hash_obj = hashlib.sha256(j.encode('utf-8'))
+                hash_hexdig_obj = hash_obj.hexdigest()
+                rez.add(hash_hexdig_obj)
+                rez.add(hash_hexdig_obj)
+
+    return len(rez)
+
+
+st = 'abcdasdafasfsdasfasfasfsagasgasdgasgasdddddasdgwqregthrdgfxg'*500
+substring(st)
+# print(f'{st} - {substring(st)} уникальных подстрок')
+
+'''
+Не знаю, как оптимизировать, т.к. все по 0  
+'''

@@ -30,3 +30,56 @@
 
 Это файл для четвертого скрипта
 """
+from memory_profiler import profile
+import sys
+
+sys.setrecursionlimit(2000)
+
+
+# до оптимизации
+@profile
+def odd_even_func(i, odd=0, even=0):
+    if i // 10 < 1:
+        even += 1
+        return even, odd
+    j = i % 10
+    i = i // 10
+    if j % 2 == 0:
+        odd += 1
+    else:
+        even += 1
+    return odd_even_func(i, odd, even)
+
+
+num = 12315465123546546512315131517897879846546549879875346531321651897987 * 99
+odd, even = odd_even_func(num)
+print(f'Четных: {odd}, нечетных: {even}')
+
+sys.setrecursionlimit(1000)
+
+
+# После оптимизации
+@profile
+def odd_even_func2(i):
+    even, odd = 0, 0
+
+    while i // 10 >= 1:
+        even += 1
+        j = i % 10
+        i = i // 10
+        if j % 2 == 0:
+            odd += 1
+        else:
+            even += 1
+    return odd, even
+
+
+num = 12315465123546546512315131517897879846546549879875346531321651897987 * 99
+odd, even = odd_even_func2(num)
+print(f'Четных: {odd}, нечетных: {even}')
+
+'''
+Наверно с помощью цикла более экономично по памяти. четсно говоря,
+у меня не получилось увидить разницу в профиле рекурсии и цикла. 
+
+'''
