@@ -30,3 +30,43 @@
 
 Это файл для пятого скрипта
 """
+
+from memory_profiler import profile
+
+# До оптимизации
+@profile
+def inversion(i, invnumb=''):
+    if i // 10 < 1:
+        invnumb += str(i)
+        return invnumb
+    j = i % 10
+    i = i // 10
+    invnumb += str(j)
+
+    return inversion(i, invnumb)
+
+
+num = 12354651351351654612312315**2
+inversion(num)
+
+
+# После оптимизации
+@profile
+def inversion2(i):
+    invnumb=''
+    while i // 10 >= 1:
+        invnumb += str(i)
+        j = i % 10
+        i = i // 10
+        invnumb += str(j)
+    return invnumb
+
+
+num = 12354651351351654612312315**6
+inversion2(num)
+
+
+'''
+Аналогично, с циклом скорее всего экономичнее, но я не увидел разницы в профиле
+
+'''

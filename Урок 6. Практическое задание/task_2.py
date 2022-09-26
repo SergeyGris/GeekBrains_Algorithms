@@ -9,3 +9,28 @@
 Опищите эту проблему и найдите простой путь ее решения.
 Опишите этот путь и покажите его применение
 """
+
+from memory_profiler import profile
+
+
+@profile
+def wrapper(input_number):
+    def func(numb, reversed_number=''):
+        if numb == 0:
+            return reversed_number
+        else:
+            digit = numb % 10
+            return func(numb // 10, reversed_number + str(digit))
+
+    return func(input_number)
+
+
+number = 1234567890
+print(f'Перевернутое число: {wrapper(number)}')
+
+'''
+Повторил пример из вашего урока. 
+я так понимаю, что проблема в том, что пр профилировании рекурсии функция 
+профилирования вызывается несколько раз на протяжении глубины стека рекурсии, 
+а декоратор позволяет измерить всю глубину.  
+'''

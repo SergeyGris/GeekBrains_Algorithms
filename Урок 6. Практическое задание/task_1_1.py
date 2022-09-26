@@ -14,7 +14,7 @@
 
 Вам нужно написать аналитику, что вы сделали для оптимизации памяти и
 чего добились.
-
+a
 
 ВНИМАНИЕ:
 1) скрипты для оптимизации нужно брать только из сделанных вами ДЗ
@@ -29,4 +29,30 @@
 генераторы, numpy, использование слотов, применение del, сериализация и т.д.
 
 Это файл для первого скрипта
+"""
+from memory_profiler import profile
+
+list_1 = [i for i in range(100000)]
+list_2 = list_1.copy()
+
+
+#  До оптимизации
+@profile
+def dict_input(keys, values):
+    rez = {}
+    for key, value in zip(keys, values):
+        rez[key] = value
+    return rez
+
+# После оптимизации
+@profile
+def dict_input2(keys, values):
+    return {key: value for key, value in zip(keys, values)}
+
+
+dict1 = dict_input(list_1, list_2)
+dict1 = dict_input2(list_1, list_2)
+
+""" 
+dict comprehension оказался более экономичным по памяти
 """
