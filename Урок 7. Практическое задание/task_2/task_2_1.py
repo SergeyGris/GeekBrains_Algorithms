@@ -36,34 +36,40 @@ def shell_sort(array):
             array[j] = temp
         k -= 1
         interval = 2 ** k - 1
-    return array[int((len(array)-1)/2)]
+    return array[int((n - 1 / 2))]
 
 
 orig_list = [randint(-100, 100) for _ in range(9)]
 print(orig_list)
 print(shell_sort(orig_list))
 
-
 # замеры 10
-orig_list = [randint(-100, 100) for _ in range(9)]
+
+m = 10
+orig_list = [randint(-100, 100) for _ in range(2 * m + 1)]
+
 print(
     timeit(
         "shell_sort(orig_list[:])",
         globals=globals(),
         number=1000))
-
-orig_list = [randint(-100, 100) for _ in range(99)]
 
 # замеры 100
+
+m = 100
+orig_list = [randint(-100, 100) for _ in range(2 * m + 1)]
+
 print(
     timeit(
         "shell_sort(orig_list[:])",
         globals=globals(),
         number=1000))
 
-orig_list = [randint(-100, 100) for _ in range(999)]
-
 # замеры 1000
+
+m = 1000
+orig_list = [randint(-100, 100) for _ in range(2 * m + 1)]
+
 print(
     timeit(
         "shell_sort(orig_list[:])",
@@ -101,34 +107,39 @@ def heap_sort(array):
     for i in range(n - 1, 0, -1):
         array[i], array[0] = array[0], array[i]
         heapify(array, i, 0)
-    return array[int((len(array)-1)/2)]
+    return array[int((n - 1) / 2)]
 
 
 orig_list = [randint(-100, 100) for _ in range(9)]
 print(orig_list)
 print(heap_sort(orig_list))
 
-
-orig_list = [randint(-100, 100) for _ in range(9)]
 # замеры 10
+
+m = 10
+orig_list = [randint(-100, 100) for _ in range(2 * m + 1)]
+
 print(
     timeit(
         "heap_sort(orig_list[:])",
         globals=globals(),
         number=1000))
-
-orig_list = [randint(-100, 100) for _ in range(99)]
-
 # замеры 100
+
+m = 100
+orig_list = [randint(-100, 100) for _ in range(2 * m + 1)]
+
 print(
     timeit(
         "heap_sort(orig_list[:])",
         globals=globals(),
         number=1000))
-
-orig_list = [randint(-100, 100) for _ in range(999)]
 
 # замеры 1000
+
+m = 1000
+orig_list = [randint(-100, 100) for _ in range(2 * m + 1)]
+
 print(
     timeit(
         "heap_sort(orig_list[:])",

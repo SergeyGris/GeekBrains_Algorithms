@@ -39,6 +39,9 @@ def bubble_sort(lst_obj):
 orig_list = [randint(-100, 100) for _ in range(10)]
 print(orig_list)
 print(bubble_sort(orig_list))
+
+# Создадим новый массив для замеров
+orig_list = [randint(-100, 100) for _ in range(10)]
 # замеры 10
 print(
     timeit(
@@ -92,6 +95,8 @@ orig_list = [randint(-100, 100) for _ in range(10)]
 print(orig_list)
 print(bubble_sort(orig_list))
 
+# Создадим новый массив для замеров
+orig_list = [randint(-100, 100) for _ in range(10)]
 # замеры 10
 print(
     timeit(
@@ -121,7 +126,7 @@ orig_list = [randint(-100, 100) for _ in range(1000)]
 
 '''
 Замеры с доработкой:
-0.0011768999999999252
+0.006832700000000025
 0.006401699999999955
 0.5269961000000001
 
