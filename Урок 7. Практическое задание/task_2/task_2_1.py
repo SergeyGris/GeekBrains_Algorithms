@@ -22,7 +22,7 @@ from timeit import timeit
 
 
 # Сортировка Шелла
-def shellSort(array):
+def shell_sort(array):
     n = len(array)
     k = int(math.log2(n))
     interval = 2 ** k - 1
@@ -36,38 +36,37 @@ def shellSort(array):
             array[j] = temp
         k -= 1
         interval = 2 ** k - 1
-    return array
+    return array[int((len(array)-1)/2)]
 
 
 orig_list = [randint(-100, 100) for _ in range(9)]
 print(orig_list)
-rez = shellSort(orig_list)
-print(rez)
-print(f' Медиана: {rez[4]}')
+print(shell_sort(orig_list))
+
 
 # замеры 10
 orig_list = [randint(-100, 100) for _ in range(9)]
 print(
     timeit(
-        "shellSort(orig_list[:])",
+        "shell_sort(orig_list[:])",
         globals=globals(),
         number=1000))
 
-orig_list = [randint(-100, 100) for _ in range(100)]
+orig_list = [randint(-100, 100) for _ in range(99)]
 
 # замеры 100
 print(
     timeit(
-        "shellSort(orig_list[:])",
+        "shell_sort(orig_list[:])",
         globals=globals(),
         number=1000))
 
-orig_list = [randint(-100, 100) for _ in range(1000)]
+orig_list = [randint(-100, 100) for _ in range(999)]
 
 # замеры 1000
 print(
     timeit(
-        "shellSort(orig_list[:])",
+        "shell_sort(orig_list[:])",
         globals=globals(),
         number=1000))
 
@@ -95,45 +94,44 @@ def heapify(array, n, i):
         heapify(array, n, largest)
 
 
-def heapSort(array):
+def heap_sort(array):
     n = len(array)
     for i in range(n // 2, -1, -1):
         heapify(array, n, i)
     for i in range(n - 1, 0, -1):
         array[i], array[0] = array[0], array[i]
         heapify(array, i, 0)
-    return array
+    return array[int((len(array)-1)/2)]
 
 
 orig_list = [randint(-100, 100) for _ in range(9)]
 print(orig_list)
-rez = heapSort(orig_list)
-print(rez)
-print(f' Медиана: {rez[4]}')
+print(heap_sort(orig_list))
 
-orig_list = [randint(-100, 100) for _ in range(10)]
+
+orig_list = [randint(-100, 100) for _ in range(9)]
 # замеры 10
 print(
     timeit(
-        "heapSort(orig_list[:])",
+        "heap_sort(orig_list[:])",
         globals=globals(),
         number=1000))
 
-orig_list = [randint(-100, 100) for _ in range(100)]
+orig_list = [randint(-100, 100) for _ in range(99)]
 
 # замеры 100
 print(
     timeit(
-        "heapSort(orig_list[:])",
+        "heap_sort(orig_list[:])",
         globals=globals(),
         number=1000))
 
-orig_list = [randint(-100, 100) for _ in range(1000)]
+orig_list = [randint(-100, 100) for _ in range(999)]
 
 # замеры 1000
 print(
     timeit(
-        "heapSort(orig_list[:])",
+        "heap_sort(orig_list[:])",
         globals=globals(),
         number=1000))
 
