@@ -68,15 +68,31 @@ class BinaryTree:
     def get_root_val(self):
         return self.root
 
+    # Скрипт, печатающий уровень дерева
+    def printLevel(self, level=1):
+        if self.root == None:
+            return
+        if level == 1:
+            print("%d " % self.root)
+        elif level > 1:
+            n = level - 1
+            self.left_child.printLevel(n)
+            self.right_child.printLevel(n)
+
 
 r = BinaryTree(8)
-print(r.get_root_val())
-print(r.get_left_child())
+# print(r.get_root_val())
+# print(r.get_left_child())
 r.insert_left(40)
-print(r.get_left_child())
-print(r.get_left_child().get_root_val())
+# print(r.get_left_child())
+# print(r.get_left_child().get_root_val())
 r.insert_right(12)
-print(r.get_right_child())
-print(r.get_right_child().get_root_val())
+# print(r.get_right_child())
+# print(r.get_right_child().get_root_val())
 r.get_right_child().set_root_val(16)
-print(r.get_right_child().get_root_val())
+# print(r.get_right_child().get_root_val())
+
+# Уровень 1 - корень (8)
+r.printGivenLevel(level=1)
+#Уровень 2 - слева 40, справа 16
+r.printGivenLevel(level=2)
