@@ -68,15 +68,3 @@ class BinaryTree:
     def get_root_val(self):
         return self.root
 
-
-r = BinaryTree(8)
-print(r.get_root_val())
-print(r.get_left_child())
-r.insert_left(40)
-print(r.get_left_child())
-print(r.get_left_child().get_root_val())
-r.insert_right(12)
-print(r.get_right_child())
-print(r.get_right_child().get_root_val())
-r.get_right_child().set_root_val(16)
-print(r.get_right_child().get_root_val())
